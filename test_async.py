@@ -5,11 +5,8 @@ from async_req import Async
 import logging
 
 logger = logging.getLogger(__name__)
-try:
-    # Python >3.8 only
-    from unittest.mock import AsyncMock
-except ImportError:
-    from asyncmock import AsyncMock
+
+from asyncmock import AsyncMock
 
 
 class MockResponse(AsyncMock):
