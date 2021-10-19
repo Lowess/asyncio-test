@@ -19,9 +19,10 @@ class Async:
         json_response = {}
         
         async with response:
-            content_type = response.headers.get("content-type")
+            content_type = response.headers
+            print(content_type)
 
-            if "application/json" in content_type:
+            if "application/json" in content_type.get("content-type"):
                 json_response = await response.json()
             else:
                 txt_response = await response.text()
