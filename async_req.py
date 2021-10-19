@@ -17,14 +17,15 @@ class Async:
 
         # Retrieve JSON content from the response
         json_response = {}
+        
+        async with response:
+            content_type = response.headers.get("content-type")
 
-        content_type = response.headers.get("content-type")
-
-        if "application/json" in content_type:
-            json_response = await response.json()
-        else:
-            txt_response = await response.text()
-            json_response = json.loads(txt_response)
+            if "application/json" in content_type:
+                json_response = await response.json()
+            else:
+                txt_response = await response.text()
+                json_response = json.loads(txt_response)
 
         return json_response
 
