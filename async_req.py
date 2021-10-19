@@ -15,8 +15,6 @@ class Async:
 
         response = await self._fetch(url, session)
 
-        response.raise_for_status()
-
         # Retrieve JSON content from the response
         json_response = {}
 
@@ -31,7 +29,7 @@ class Async:
         return json_response
 
     async def main(self, urls):
-        async with ClientSession() as session:
+        async with ClientSession(raise_for_status=True) as session:
             tasks = []
             for url in urls:
                 tasks.append(cli.call(url, session))
